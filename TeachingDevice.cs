@@ -25,19 +25,21 @@ namespace QuanLyThietBi
             Status = DeviceStatus.Available;
         }
 
-        // cac phuong thuc truu tuong, lop con ghi de (da hinh)
         public abstract bool IsReadyForUse();
         public abstract double GetDefaultPriorityScore();
 
         public void Borrow()
         {
-            // TODO: chua kiem tra IsReadyForUse, dang set Borrowed luon
+            // FIX lan 1: chi cho muon khi thiet bi san sang
+            if (!IsReadyForUse())
+                throw new DeviceNotReadyException(Id, Status);
+
             Status = DeviceStatus.Borrowed;
         }
 
         public void Return()
         {
-            // TODO: chua kiem tra trang thai Borrowed
+            // TODO: van chua kiem tra trang thai Borrowed, de sau fix
             Status = DeviceStatus.Available;
         }
     }
