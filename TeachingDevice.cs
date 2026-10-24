@@ -30,7 +30,6 @@ namespace QuanLyThietBi
 
         public void Borrow()
         {
-            // FIX lan 1: chi cho muon khi thiet bi san sang
             if (!IsReadyForUse())
                 throw new DeviceNotReadyException(Id, Status);
 
@@ -39,7 +38,10 @@ namespace QuanLyThietBi
 
         public void Return()
         {
-            // TODO: van chua kiem tra trang thai Borrowed, de sau fix
+            // FIX lan 2: chi cho tra khi dang o trang thai Borrowed
+            if (Status != DeviceStatus.Borrowed)
+                throw new InvalidOperationException("Thiet bi " + Id + " khong o trang thai Borrowed");
+
             Status = DeviceStatus.Available;
         }
     }
