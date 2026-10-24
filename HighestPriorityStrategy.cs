@@ -18,8 +18,21 @@ namespace QuanLyThietBi
             if (candidates == null || candidates.Count == 0)
                 throw new NoSuitableItemException();
 
-            // TODO: chua cai dung, dang tra ve phan tu dau tien thay vi phan tu cao nhat
-            return candidates[0];
+            // FIX lan 2: tim dung phan tu co diem cao nhat
+            T best = candidates[0];
+            double bestScore = scoreSelector(candidates[0]);
+
+            for (int i = 1; i < candidates.Count; i++)
+            {
+                double score = scoreSelector(candidates[i]);
+                if (score > bestScore)
+                {
+                    bestScore = score;
+                    best = candidates[i];
+                }
+            }
+
+            return best;
         }
     }
 }
