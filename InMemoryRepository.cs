@@ -13,7 +13,6 @@ namespace QuanLyThietBi
             if (item == null)
                 throw new ArgumentNullException(nameof(item), "Khong cho phep them phan tu null");
 
-            // FIX lan 1: kiem tra trung Id truoc khi them
             if (FindById(item.Id) != null)
                 throw new DuplicateIdException(item.Id);
 
@@ -41,8 +40,8 @@ namespace QuanLyThietBi
 
         public IReadOnlyList<T> GetAll()
         {
-            // TODO: van dang tra ve collection noi bo, de sau fix
-            return items;
+            // FIX lan 2: tra ve ban sao de ma ngoai khong sua dc collection noi bo
+            return new List<T>(items);
         }
 
         public IReadOnlyList<T> FindAll(Predicate<T> condition)
